@@ -2792,6 +2792,20 @@
             },
 
             {
+              "name": "eles.preorder",
+              "descr": "Mark edges of a connected tree in preorder.",
+              "formats": [
+                {
+                  "args": [
+                        { "name": "root", "descr": "The root node from which the preorder rank starts" },
+                        { "name": "initialRank", "descr": "The startng rank for the root node" }
+                  ]
+                }
+              ],
+              "md": "collection/preorder"
+            },
+
+            {
               "name": "eles.pageRank",
               "descr": "Rank the nodes in the collection using the Page Rank algorithm.",
               "formats": [

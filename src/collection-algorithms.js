@@ -395,7 +395,21 @@
           return new $$.Collection( cy, S );
         }
       };
-    }  
+    },
+
+    preorder: function(root, startCount) {
+
+      root.data("preorder", startCount);
+      var outgoingEdges = root.connectedEdges().intersect(this.edges());  // Why the last?
+      var baseTree = this;
+
+      outgoingEdges.forEach(function(edge) {
+        var childVertex = edge.connectedNodes().not(root);
+        startCount = baseTree.not(edge).preorder(childVertex, startCount + 1);
+      });
+      return startCount;
+    }
+
   });
 
   // nice, short mathemathical alias

@@ -964,4 +964,34 @@ describe('Graph theory algorithms (traversing, search, etc)', function(){
     expect( res.betweenness(d) ).to.equal(0);
     expect( res.betweenness(e) ).to.equal(0);
   });
+
+  it('eles.preorder()', function() {
+      // Three-vertex tree a--b--c
+      var testPreorder = cytoscape({
+	elements: {
+	  nodes: [
+	    { data: { id: 'a' } },
+	    { data: { id: 'b' } },
+	    { data: { id: 'c' } },
+	  ],
+	  edges: [
+	    { data: { id: 'ab', source: 'a', target: 'b' } },
+	    { data: { id: 'bc', source: 'b', target: 'c' } },
+	  ]
+	}
+      });
+      var a = testPreorder.$('#a');
+      var b = testPreorder.$('#b');
+      var c = testPreorder.$('#c');
+
+      testPreorder.elements().preorder(a, 1);
+      expect(a.data('preorder')).to.equal(1);
+      expect(b.data('preorder')).to.equal(2);
+      expect(c.data('preorder')).to.equal(3);
+
+      testPreorder.elements().preorder(b, 42);
+      expect(a.data('preorder')).to.equal(43);
+      expect(b.data('preorder')).to.equal(42);
+      expect(c.data('preorder')).to.equal(44);
+  });
 });
